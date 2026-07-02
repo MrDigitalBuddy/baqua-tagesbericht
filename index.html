@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>baqua Tagesbericht</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+:root{--gray:#484848;--blue:#A8CDDD;--blue-l:#D5E8F0;--blue-d:#185FA5;--green:#3B6D11;--green-l:#EAF3DE;--orange:#BA7517;--orange-l:#FAEEDA;--red:#A32D2D;--red-l:#FCEBEB;--purple:#3C3489;--purple-l:#EEEDFE;--border:#e2e2df;--border-s:#c8c8c4;--surface:#fff;--s1:#f7f7f5;--text:#1a1a18;--text2:#5a5a56;--text3:#9a9a96;--r:8px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,sans-serif;font-size:14px;color:var(--text);background:#f2f2ee;min-height:100vh;padding-bottom:2rem}
+.page{max-width:600px;margin:0 auto}
+.hbar{background:var(--gray);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.hbar h1{font-size:15px;font-weight:600;color:#fff}.hbar p{font-size:11px;color:rgba(255,255,255,0.55);margin-top:1px}
+.hbar-logo{background:var(--blue);color:#fff;font-size:12px;font-weight:600;padding:4px 10px;border-radius:20px}
+.section{background:var(--surface);border-bottom:.5px solid var(--border);padding:16px 20px}
+.block-hdr{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.bnum{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:#fff;flex-shrink:0}
+.bnum-blue{background:#378ADD}.bnum-green{background:var(--green)}.bnum-gray{background:#888}
+.btitle{font-size:15px;font-weight:600}.bsub{font-size:11px;color:var(--text3);margin-left:auto}
+.meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fg{display:flex;flex-direction:column;gap:4px}.fg+.fg{margin-top:10px}
+label{font-size:11px;font-weight:500;color:var(--text2);letter-spacing:.03em}.req{color:#C0392B}
+input,select,textarea{font-family:inherit;font-size:13px;color:var(--text);background:var(--s1);border:.5px solid var(--border-s);border-radius:var(--r);padding:8px 10px;width:100%;outline:none;-webkit-appearance:none}
+input:focus,select:focus,textarea:focus{border-color:var(--blue);background:#fff}
+textarea{resize:vertical;min-height:56px;line-height:1.5}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.contact-card{background:var(--s1);border:.5px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px}
+.card-hdr{display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;gap:8px}
+.card-hdr-left{display:flex;align-items:center;gap:8px;flex:1;min-width:0}
+.card-num{width:22px;height:22px;border-radius:50%;background:var(--surface);border:.5px solid var(--border-s);font-size:11px;font-weight:500;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--text2)}
+.card-name{font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chev{font-size:16px;color:var(--text3);transition:transform .18s;flex-shrink:0}
+.chev.open{transform:rotate(180deg)}
+.card-body{margin-top:12px;display:flex;flex-direction:column;gap:10px}
+.slabel{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px}
+.sub-box{background:var(--surface);border:.5px solid var(--border);border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.pills{display:flex;flex-wrap:wrap;gap:5px}
+.pill{font-size:11px;padding:4px 10px;border-radius:20px;border:.5px solid var(--border-s);background:var(--surface);color:var(--text2);cursor:pointer;transition:all .12s;white-space:nowrap;line-height:1.4;-webkit-tap-highlight-color:transparent}
+.pill.on-green{background:var(--green-l);color:#1a4008;border-color:#639922}
+.pill.on-orange{background:var(--orange-l);color:#4a2800;border-color:#BA7517}
+.pill.on-red{background:var(--red-l);color:#5a1010;border-color:#E24B4A}
+.pill.on-blue{background:var(--blue-l);color:#0a2e5a;border-color:#378ADD}
+.pill.on-purple{background:var(--purple-l);color:#1a0f4a;border-color:#7F77DD}
+.pill.on-gray{background:#D3D1C7;color:#1a1a18;border-color:#888}
+.check-row{display:flex;flex-wrap:wrap;gap:12px}
+.check-item{display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;color:var(--text2)}
+.check-item input[type="checkbox"]{width:15px;height:15px;flex-shrink:0;padding:0;cursor:pointer;accent-color:var(--gray)}
+.add-btn{display:flex;align-items:center;justify-content:center;gap:6px;padding:9px 12px;border-radius:var(--r);border:1px dashed var(--border-s);background:transparent;color:var(--text3);font-size:12px;cursor:pointer;width:100%;margin-top:2px;font-family:inherit}
+.add-btn:hover{background:var(--s1);color:var(--text2)}
+.rm-btn{font-size:11px;color:var(--text3);background:none;border:none;cursor:pointer;padding:4px 0;font-family:inherit;display:flex;align-items:center;gap:4px}
+.rm-btn:hover{color:var(--red)}
+.divider{border:none;border-top:.5px solid var(--border);margin:0}
+.submit-section{padding:16px 20px;background:var(--surface)}
+.btn-submit{background:var(--gray);color:#fff;font-size:14px;font-weight:500;padding:12px 16px;border:none;border-radius:var(--r);cursor:pointer;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;font-family:inherit}
+.btn-submit:hover{background:#333}.btn-submit:disabled{background:#aaa;cursor:not-allowed}
+.modal-bg{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);display:flex;align-items:flex-end;z-index:200}
+.modal{background:var(--surface);border-radius:16px 16px 0 0;padding:20px;max-height:85vh;overflow-y:auto;width:100%;max-width:600px;margin:0 auto}
+.modal h2{font-size:15px;font-weight:600;margin-bottom:14px}
+.pblock{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin:12px 0 5px;padding-top:10px;border-top:.5px solid var(--border)}
+.pblock:first-child{border-top:none;margin-top:0}
+.pline{font-size:12px;color:var(--text2);padding:4px 0;line-height:1.7}
+.pline strong{color:var(--text);font-weight:500}
+.ptag{display:inline-block;font-size:10px;padding:2px 7px;border-radius:10px;margin:1px 2px 1px 0;font-weight:500}
+.ptag-green{background:var(--green-l);color:#1a4008}.ptag-blue{background:var(--blue-l);color:#0a2e5a}
+.ptag-purple{background:var(--purple-l);color:#1a0f4a}.ptag-orange{background:var(--orange-l);color:#4a2800}
+.ptag-gray{background:#D3D1C7;color:#1a1a18}.ptag-red{background:var(--red-l);color:#5a1010}
+.btn-confirm{background:var(--blue);color:#fff;font-size:13px;font-weight:500;padding:11px;border:none;border-radius:var(--r);cursor:pointer;width:100%;margin-top:14px;display:flex;align-items:center;justify-content:center;gap:6px;font-family:inherit}
+.btn-confirm:disabled{background:#aaa;cursor:not-allowed}
+.btn-back{background:none;border:.5px solid var(--border-s);color:var(--text2);font-size:13px;padding:10px;border-radius:var(--r);cursor:pointer;width:100%;margin-top:8px;font-family:inherit}
+.success-box{background:var(--green-l);border:.5px solid #639922;border-radius:10px;padding:20px;text-align:center;margin-top:14px}
+.success-box .ico{font-size:32px;margin-bottom:8px}
+.success-box h3{font-size:15px;font-weight:600;color:#1a4008;margin-bottom:6px}
+.success-box p{font-size:12px;color:var(--green)}
+.success-box a{color:var(--blue-d);font-size:12px;text-decoration:underline;display:block;margin-top:10px}
+.err-box{background:var(--red-l);border:.5px solid #E24B4A;border-radius:8px;padding:10px;font-size:12px;color:#5a1010;margin-top:10px}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* Webhook success box */
+.webhook-box{background:#f0f8ff;border:.5px solid var(--blue);border-radius:10px;padding:16px;margin-top:14px}
+.webhook-box h3{font-size:14px;font-weight:600;color:var(--gray);margin-bottom:8px}
+.webhook-box textarea{font-size:11px;line-height:1.5;height:120px;font-family:monospace;background:#fff}
+.webhook-box p{font-size:11px;color:var(--text2);margin-top:6px}
+</style>
+</head>
+<body>
+<div class="page">
+<div class="hbar">
+  <div><h1>baqua Tagesbericht</h1><p>Täglich bis 17:30 Uhr absenden</p></div>
+  <div class="hbar-logo">baqua</div>
+</div>
+
+<div class="section">
+  <div class="meta-grid">
+    <div class="fg"><label>Vertriebler <span class="req">*</span></label>
+      <select id="m-name"><option value="">— Name —</option><option>Jürgen</option><option>Tobi</option><option>Lisa</option><option>Nele</option><option>Adrian</option></select></div>
+    <div class="fg"><label>Datum <span class="req">*</span></label><input type="date" id="m-datum"></div>
+  </div>
+</div>
+<div class="divider"></div>
+
+<div class="section">
+  <div class="block-hdr"><div class="bnum bnum-blue">1</div><span class="btitle">Convention Akquise</span><span class="bsub" id="conv-count">0 Kontakte</span></div>
+  <div id="conv-list"></div>
+  <button class="add-btn" onclick="addConv()"><i class="ti ti-plus"></i> Kontakt hinzufügen</button>
+</div>
+<div class="divider"></div>
+
+<div class="section">
+  <div class="block-hdr"><div class="bnum bnum-green">2</div><span class="btitle">Tagesgeschäft</span><span class="bsub" id="sales-count">0 Kontakte</span></div>
+  <div id="sales-list"></div>
+  <button class="add-btn" onclick="addSales()"><i class="ti ti-plus"></i> Kontakt hinzufügen</button>
+</div>
+<div class="divider"></div>
+
+<div class="section">
+  <div class="block-hdr"><div class="bnum bnum-gray">3</div><span class="btitle">Tagesabschluss</span></div>
+  <div class="fg"><label>Highlight des Tages</label><textarea id="b3-hl" placeholder="Was lief heute besonders gut?"></textarea></div>
+  <div class="fg"><label>Blockade / Problem</label><textarea id="b3-bl" placeholder="Was hat heute gebremst?"></textarea></div>
+</div>
+<div class="divider"></div>
+
+<div class="submit-section">
+  <button class="btn-submit" onclick="showPreview()"><i class="ti ti-eye"></i> Vorschau & Absenden</button>
+</div>
+</div>
+
+<div class="modal-bg" id="modal" style="display:none">
+  <div class="modal">
+    <h2>Vorschau Tagesbericht</h2>
+    <div id="preview-content"></div>
+    <div id="modal-actions">
+      <button class="btn-confirm" id="confirm-btn" onclick="doSubmit()"><i class="ti ti-send"></i> Jetzt absenden → Notion</button>
+      <button class="btn-back" onclick="closeModal()">Zurück zum Formular</button>
+    </div>
+    <div id="success-area" style="display:none"></div>
+    <div id="err-area"></div>
+  </div>
+</div>
+
+<script>
+const NOTION_DS  = "3bcea97f-6a31-491a-9cd6-d284da286476";
+const ARCHIV_URL = "https://app.notion.com/p/38f286c4615d812294eae72c08138485";
+const NOTION_TOKEN = "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";
+// CORS Proxy — öffentlicher Proxy für Notion API
+// using own server
+
+let convIds=[], salesIds=[];
+document.getElementById('m-datum').value = new Date().toISOString().split('T')[0];
+
+const BRANCHEN=['Fugenlos','Fliese','SHK','Naturstein','Händler','Architekt','Sonstiges'];
+const SOFTWARE=['Hero','Plankraft','WinWorker','Keine'];
+const DIGI=[{l:'Kein Thema',c:'on-gray'},{l:'Interesse',c:'on-orange'},{l:'Teilweise',c:'on-blue'},{l:'Vollständig',c:'on-green'}];
+const TICKET=[{l:'Bronze 1 Tag',c:'on-gray'},{l:'Bronze 3 Tage',c:'on-gray'},{l:'Silber',c:'on-purple'}];
+const STATUS_C=[{l:'JA — kommt',c:'on-green'},{l:'Impulsnötig',c:'on-orange'},{l:'Rückruf',c:'on-orange'},{l:'Nicht erreicht',c:'on-blue'},{l:'Kein Interesse',c:'on-red'}];
+const SD=[{l:'Rückzahlung bei Nichtgefallen',c:'on-blue'},{l:'5.000 € Jahresumsatz',c:'on-blue'},{l:'Bronze kostenlos',c:'on-green'},{l:'Zuzahlung Silber 500 €',c:'on-purple'},{l:'VIP-Zugang',c:'on-purple'}];
+const NEXT_C=[{l:'Follow-up',c:'on-orange'},{l:'Infomaterial schicken',c:'on-blue'},{l:'Kein Interesse',c:'on-red'},{l:'Erwarte Buchung',c:'on-green'}];
+const PGR=[{l:'EFH',c:'on-blue'},{l:'MFH',c:'on-blue'},{l:'Gewerbe',c:'on-blue'},{l:'Mix',c:'on-blue'}];
+const DUSCH=[{l:'Revi',c:'on-purple'},{l:'Estrich',c:'on-blue'},{l:'Bert',c:'on-blue'},{l:'Flachwaschtisch',c:'on-orange'},{l:'Mix',c:'on-gray'},{l:'Kein Thema',c:'on-gray'}];
+const SEG=[{l:'Standard',c:'on-gray'},{l:'Gehoben',c:'on-blue'},{l:'Premium',c:'on-purple'}];
+const NEXT_S=[{l:'Angebot schicken',c:'on-blue'},{l:'Muster schicken',c:'on-blue'},{l:'Termin',c:'on-green'},{l:'Follow-up',c:'on-orange'},{l:'Kein Interesse',c:'on-red'}];
+
+function pills(id,key,opts,single){
+  return `<div class="pills" id="pp-${id}-${key}">`+opts.map(o=>`<span class="pill" data-active="0" data-color="${o.c}" data-single="${single?1:0}" onclick="tp(this,'${id}','${key}')">${o.l}</span>`).join('')+`</div>`;
+}
+function tp(el,id,key){
+  const s=el.dataset.single==='1',c=document.getElementById(`pp-${id}-${key}`),was=el.dataset.active==='1';
+  if(s) c.querySelectorAll('.pill').forEach(p=>{p.dataset.active='0';p.className='pill';});
+  if(!was){el.dataset.active='1';el.className='pill '+el.dataset.color;}
+  else if(!s){el.dataset.active='0';el.className='pill';}
+}
+function ga(id,key){
+  const c=document.getElementById(`pp-${id}-${key}`);
+  if(!c) return '';
+  return [...c.querySelectorAll('[data-active="1"]')].map(e=>e.textContent).join(', ');
+}
+function v(id){return (document.getElementById(id)||{}).value||'';}
+function cb(id){return !!((document.getElementById(id)||{}).checked);}
+function uc(elId,n){const el=document.getElementById(elId);if(el)el.textContent=n+' Kontakt'+(n===1?'':'e');}
+function ul(id,val){const el=document.getElementById('lbl-'+id);if(el)el.textContent=val||'Neuer Kontakt';}
+function tc(id){
+  const b=document.getElementById('body-'+id),c=document.getElementById('chev-'+id);
+  const open=b.style.display!=='none'&&b.style.display!=='';
+  b.style.display=open?'none':'flex';c.classList.toggle('open',!open);
+}
+function rm(type,id){
+  if(type==='conv'){convIds=convIds.filter(x=>x!==id);uc('conv-count',convIds.length);}
+  else{salesIds=salesIds.filter(x=>x!==id);uc('sales-count',salesIds.length);}
+  document.getElementById('card-'+id)?.remove();
+}
+
+function convCard(id,n){return `<div class="contact-card" id="card-${id}">
+<div class="card-hdr" onclick="tc('${id}')"><div class="card-hdr-left"><div class="card-num">${n}</div><div class="card-name" id="lbl-${id}">Neuer Kontakt</div></div><i class="ti ti-chevron-down chev open" id="chev-${id}"></i></div>
+<div class="card-body" id="body-${id}">
+<div class="two"><div class="fg"><label>Firma / Name <span class="req">*</span></label><input type="text" id="${id}-firma" placeholder="Firma GmbH" oninput="ul('${id}',this.value)"></div>
+<div class="fg"><label>Branche</label><select id="${id}-br"><option value="">—</option>${BRANCHEN.map(b=>`<option>${b}</option>`).join('')}</select></div></div>
+<div class="two"><div class="fg"><label>E-Mail</label><input type="email" id="${id}-email" placeholder="name@firma.de"></div><div class="fg"><label>Telefon</label><input type="tel" id="${id}-tel" placeholder="+49 ..."></div></div>
+<div class="sub-box"><div class="slabel">Status</div>${pills(id,'status',STATUS_C,true)}</div>
+<div class="sub-box"><div class="slabel">Ticket</div>${pills(id,'ticket',TICKET,true)}</div>
+<div class="sub-box"><div class="slabel">Schweinedeal</div>${pills(id,'sd',SD,false)}<input type="text" id="${id}-sd-free" placeholder="Individuelles Angebot..."></div>
+<div class="sub-box"><div class="slabel">Software</div>${pills(id,'sw',SOFTWARE.map(x=>({l:x,c:'on-blue'})),false)}<input type="text" id="${id}-sw-free" placeholder="Weitere Software..."></div>
+<div class="sub-box"><div class="slabel">Digitalisierungsgrad</div>${pills(id,'digi',DIGI,true)}</div>
+<div class="fg"><label>Größter Engpass</label><textarea id="${id}-engpass" placeholder="Was bremst ihn am meisten?"></textarea></div>
+<div class="fg"><label>Ziele in 3–5 Jahren</label><textarea id="${id}-ziele" placeholder="Wachstum, Positionierung..."></textarea></div>
+<div class="sub-box"><div class="slabel">Checks</div><div class="check-row">
+<label class="check-item"><input type="checkbox" id="${id}-rc"> Rabattcode übermittelt</label>
+<label class="check-item"><input type="checkbox" id="${id}-md"> Interesse Messedeal</label>
+<label class="check-item"><input type="checkbox" id="${id}-dt"> Dachterrassen-Abschluss</label>
+<label class="check-item"><input type="checkbox" id="${id}-info"> Infomaterial zugesendet</label></div></div>
+<div class="sub-box"><div class="slabel">Nächster Schritt</div>${pills(id,'next',NEXT_C,true)}</div>
+<div class="fg"><label>Rückruf Termin</label><input type="datetime-local" id="${id}-cb"></div>
+<div class="fg"><label>Notiz</label><textarea id="${id}-note" placeholder="Wie sind sie verblieben?"></textarea></div>
+<div style="display:flex;justify-content:flex-end;margin-top:4px"><button class="rm-btn" onclick="rm('conv','${id}')"><i class="ti ti-trash"></i> Entfernen</button></div>
+</div></div>`;}
+
+function salesCard(id,n){return `<div class="contact-card" id="card-${id}">
+<div class="card-hdr" onclick="tc('${id}')"><div class="card-hdr-left"><div class="card-num">${n}</div><div class="card-name" id="lbl-${id}">Neuer Kontakt</div></div><i class="ti ti-chevron-down chev open" id="chev-${id}"></i></div>
+<div class="card-body" id="body-${id}">
+<div class="two"><div class="fg"><label>Firma / Name <span class="req">*</span></label><input type="text" id="${id}-firma" placeholder="Firma GmbH" oninput="ul('${id}',this.value)"></div>
+<div class="fg"><label>Branche</label><select id="${id}-br"><option value="">—</option>${BRANCHEN.map(b=>`<option>${b}</option>`).join('')}</select></div></div>
+<div class="two"><div class="fg"><label>E-Mail</label><input type="email" id="${id}-email" placeholder="name@firma.de"></div><div class="fg"><label>Telefon</label><input type="tel" id="${id}-tel" placeholder="+49 ..."></div></div>
+<div class="two"><div class="fg"><label>Jahresbedarf (Bäder)</label><input type="number" id="${id}-yearly" placeholder="20"></div><div class="fg"><label>Projekte / Monat</label><input type="number" id="${id}-monthly" placeholder="2"></div></div>
+<div class="sub-box"><div class="slabel">Projektgröße</div>${pills(id,'pgr',PGR,false)}</div>
+<div class="two"><div class="fg"><label>Ø Badwert</label><input type="text" id="${id}-badwert" placeholder="z.B. 8.000 €"></div><div class="fg"><label>Waschtische / Monat</label><input type="number" id="${id}-wt" placeholder="4"></div></div>
+<div class="sub-box"><div class="slabel">Produkt-Interesse</div>${pills(id,'dusch',DUSCH,false)}</div>
+<div class="sub-box"><div class="slabel">Segment</div>${pills(id,'seg',SEG,true)}</div>
+<div class="fg"><label>Aktuelle Marken</label><input type="text" id="${id}-marken" placeholder="z.B. Geberit, Hansgrohe"></div>
+<div class="sub-box"><div class="slabel">Nächster Schritt</div>${pills(id,'next',NEXT_S,true)}</div>
+<div class="sub-box"><div class="slabel">Convention angesprochen?</div>${pills(id,'conv',[{l:'Ja — Interesse',c:'on-blue'},{l:'Ja — kommt',c:'on-green'},{l:'Nein',c:'on-red'}],true)}</div>
+<div class="fg"><label>Notiz</label><textarea id="${id}-note" placeholder="Besonderheiten, Potenzial..."></textarea></div>
+<div style="display:flex;justify-content:flex-end;margin-top:4px"><button class="rm-btn" onclick="rm('sales','${id}')"><i class="ti ti-trash"></i> Entfernen</button></div>
+</div></div>`;}
+
+function addConv(){const id='c'+Date.now();convIds.push(id);document.getElementById('conv-list').insertAdjacentHTML('beforeend',convCard(id,convIds.length));uc('conv-count',convIds.length);}
+function addSales(){const id='s'+Date.now();salesIds.push(id);document.getElementById('sales-list').insertAdjacentHTML('beforeend',salesCard(id,salesIds.length));uc('sales-count',salesIds.length);}
+
+function collectData(){
+  return{name:v('m-name'),datum:v('m-datum'),hl:v('b3-hl'),bl:v('b3-bl'),
+    convData:convIds.map(id=>({firma:v(id+'-firma'),branche:v(id+'-br'),email:v(id+'-email'),tel:v(id+'-tel'),status:ga(id,'status'),ticket:ga(id,'ticket'),sd:ga(id,'sd'),sdFree:v(id+'-sd-free'),sw:ga(id,'sw'),swFree:v(id+'-sw-free'),digi:ga(id,'digi'),engpass:v(id+'-engpass'),ziele:v(id+'-ziele'),next:ga(id,'next'),note:v(id+'-note'),callback:v(id+'-cb'),rc:cb(id+'-rc'),md:cb(id+'-md'),dt:cb(id+'-dt'),info:cb(id+'-info')})),
+    salesData:salesIds.map(id=>({firma:v(id+'-firma'),branche:v(id+'-br'),email:v(id+'-email'),tel:v(id+'-tel'),yearly:v(id+'-yearly'),monthly:v(id+'-monthly'),pgr:ga(id,'pgr'),badwert:v(id+'-badwert'),wt:v(id+'-wt'),dusch:ga(id,'dusch'),seg:ga(id,'seg'),marken:v(id+'-marken'),next:ga(id,'next'),conv:ga(id,'conv'),note:v(id+'-note')}))};
+}
+
+function buildContent(d){
+  let md='';
+  if(d.convData.length){
+    md+=`## 🎪 Block 1 — Convention Akquise\n\n`;
+    d.convData.forEach((c,i)=>{
+      md+=`### ${i+1}. ${c.firma||'—'}\n`;
+      if(c.branche) md+=`**Branche:** ${c.branche}  \n`;
+      if(c.email||c.tel) md+=`**Kontakt:** ${[c.email,c.tel].filter(Boolean).join(' · ')}  \n`;
+      if(c.status) md+=`**Status:** ${c.status}  \n`;
+      if(c.ticket) md+=`**Ticket:** ${c.ticket}  \n`;
+      const sdAll=[c.sd,c.sdFree].filter(Boolean).join(' · ');
+      if(sdAll) md+=`**Schweinedeal:** ${sdAll}  \n`;
+      const swAll=[c.sw,c.swFree].filter(Boolean).join(', ');
+      if(swAll) md+=`**Software:** ${swAll}  \n`;
+      if(c.digi) md+=`**Digitalisierung:** ${c.digi}  \n`;
+      if(c.engpass) md+=`**Engpass:** ${c.engpass}  \n`;
+      if(c.ziele) md+=`**Ziele:** ${c.ziele}  \n`;
+      const checks=[];if(c.rc)checks.push('RC✓');if(c.md)checks.push('Messedeal✓');if(c.dt)checks.push('Dachterr.✓');if(c.info)checks.push('Info✓');
+      if(checks.length) md+=`**Checks:** ${checks.join(' · ')}  \n`;
+      if(c.next) md+=`**Nächster Schritt:** ${c.next}  \n`;
+      if(c.note) md+=`**Notiz:** ${c.note}  \n`;
+      md+='\n';
+    });
+  }
+  if(d.salesData.length){
+    md+=`---\n\n## 💼 Block 2 — Tagesgeschäft\n\n`;
+    d.salesData.forEach((s,i)=>{
+      md+=`### ${i+1}. ${s.firma||'—'}\n`;
+      if(s.branche) md+=`**Branche:** ${s.branche}  \n`;
+      if(s.email||s.tel) md+=`**Kontakt:** ${[s.email,s.tel].filter(Boolean).join(' · ')}  \n`;
+      if(s.yearly||s.monthly) md+=`**Bedarf:** ${s.yearly?s.yearly+' Bäder/Jahr':''} ${s.monthly?'· '+s.monthly+' Proj/Mo':''}  \n`;
+      if(s.dusch) md+=`**Produkt-Interesse:** ${s.dusch}  \n`;
+      if(s.seg) md+=`**Segment:** ${s.seg}  \n`;
+      if(s.marken) md+=`**Marken:** ${s.marken}  \n`;
+      if(s.conv) md+=`**Convention:** ${s.conv}  \n`;
+      if(s.next) md+=`**Nächster Schritt:** ${s.next}  \n`;
+      if(s.note) md+=`**Notiz:** ${s.note}  \n`;
+      md+='\n';
+    });
+  }
+  if(d.hl||d.bl){
+    md+=`---\n\n## ⚡ Tagesabschluss\n\n`;
+    if(d.hl) md+=`**Highlight:** ${d.hl}\n\n`;
+    if(d.bl) md+=`**Blockade:** ${d.bl}\n\n`;
+  }
+  return md;
+}
+
+function richText(t){
+  const parts=[];const re=/\*\*(.+?)\*\*/g;let last=0,m;
+  while((m=re.exec(t))!==null){if(m.index>last)parts.push({type:'text',text:{content:t.slice(last,m.index)}});parts.push({type:'text',text:{content:m[1]},annotations:{bold:true}});last=m.index+m[0].length;}
+  if(last<t.length)parts.push({type:'text',text:{content:t.slice(last)}});
+  return parts.length>0?parts:[{type:'text',text:{content:t}}];
+}
+function mdToBlocks(md){
+  const lines=md.split('\n'),blocks=[];
+  for(let i=0;i<lines.length;i++){
+    const l=lines[i];
+    if(l.startsWith('### '))blocks.push({object:'block',type:'heading_3',heading_3:{rich_text:richText(l.slice(4).trim())}});
+    else if(l.startsWith('## '))blocks.push({object:'block',type:'heading_2',heading_2:{rich_text:richText(l.slice(3).trim())}});
+    else if(l.startsWith('---'))blocks.push({object:'block',type:'divider',divider:{}});
+    else if(l.trim())blocks.push({object:'block',type:'paragraph',paragraph:{rich_text:richText(l.trim())}});
+  }
+  return blocks;
+}
+
+function tag(t,c){return `<span class="ptag ptag-${c}">${t}</span>`;}
+function statusTag(s){
+  if(!s)return '';
+  if(s.includes('kommt')||s==='Erwarte Buchung')return tag(s,'green');
+  if(s==='Impulsnötig'||s==='Rückruf')return tag(s,'orange');
+  if(s==='Nicht erreicht')return tag(s,'blue');
+  if(s==='Kein Interesse')return tag(s,'red');
+  return tag(s,'gray');
+}
+
+function showPreview(){
+  const name=v('m-name'),datum=v('m-datum');
+  if(!name||!datum){alert('Bitte Name und Datum ausfüllen.');return;}
+  const d=collectData();
+  let html=`<div class="pline"><strong>${name}</strong> · ${datum}</div>`;
+  if(d.convData.length){
+    html+=`<div class="pblock">Convention Akquise — ${d.convData.length} Kontakte</div>`;
+    d.convData.forEach((c,i)=>{
+      html+=`<div class="pline">${i+1}. <strong>${c.firma||'—'}</strong>${c.branche?' · '+c.branche:''}`;
+      html+=statusTag(c.status);
+      if(c.ticket)html+=tag(c.ticket,c.ticket==='Silber'?'purple':'gray');
+      if(c.next)html+=tag(c.next,c.next==='Erwarte Buchung'?'green':c.next==='Kein Interesse'?'red':c.next==='Follow-up'?'orange':'blue');
+      const checks=[];if(c.rc)checks.push('RC✓');if(c.md)checks.push('Messedeal✓');if(c.dt)checks.push('Dachterr.✓');if(c.info)checks.push('Info✓');
+      if(checks.length)html+=`<br><small style="color:var(--green)">${checks.join(' · ')}</small>`;
+      if(c.note)html+=`<br><small style="color:var(--text3)">${c.note}</small>`;
+      html+=`</div>`;
+    });
+  }
+  if(d.salesData.length){
+    html+=`<div class="pblock">Tagesgeschäft — ${d.salesData.length} Kontakte</div>`;
+    d.salesData.forEach((s,i)=>{
+      html+=`<div class="pline">${i+1}. <strong>${s.firma||'—'}</strong>${s.branche?' · '+s.branche:''}`;
+      if(s.seg)html+=tag(s.seg,s.seg==='Premium'?'purple':s.seg==='Gehoben'?'blue':'gray');
+      if(s.conv)html+=tag('Conv: '+s.conv,s.conv.includes('kommt')?'green':s.conv.includes('Interesse')?'blue':'red');
+      if(s.dusch)html+=`<br><small>Produkte: ${s.dusch}</small>`;
+      if(s.next)html+=`<br><small>→ ${s.next}</small>`;
+      if(s.note)html+=`<br><small style="color:var(--text3)">${s.note}</small>`;
+      html+=`</div>`;
+    });
+  }
+  if(d.hl||d.bl){html+=`<div class="pblock">Tagesabschluss</div>`;if(d.hl)html+=`<div class="pline">✅ ${d.hl}</div>`;if(d.bl)html+=`<div class="pline">⚠ ${d.bl}</div>`;}
+  document.getElementById('preview-content').innerHTML=html;
+  document.getElementById('modal-actions').style.display='block';
+  document.getElementById('success-area').style.display='none';
+  document.getElementById('err-area').innerHTML='';
+  document.getElementById('modal').style.display='flex';
+}
+
+async function doSubmit(){
+  const d=collectData();
+  const btn=document.getElementById('confirm-btn');
+  btn.disabled=true;btn.innerHTML=`<span class="spin"></span> Wird übertragen...`;
+  document.getElementById('err-area').innerHTML='';
+  const titel=`TB – ${d.datum} · ${d.name}`;
+  const content=buildContent(d);
+  const notionUrl='https://api.notion.com/v1/pages';
+  const proxyUrl="/notion/pages";
+  const hdrs={'Content-Type':'application/json'};
+  try{
+    const r=await fetch(proxyUrl,{method:'POST',headers:hdrs,body:JSON.stringify({
+      parent:{database_id:NOTION_DS},
+      properties:{
+        "Titel":{title:[{text:{content:titel}}]},
+        "Berichtstyp":{select:{name:"TB – Tagesbericht"}},
+        "Verantwortlicher":{select:{name:d.name}},
+        "Bereich":{select:{name:"baqua Convention"}},
+        "Empfänger":{select:{name:"Intern"}},
+        "Status":{select:{name:"Fertig"}},
+        "Datum":{date:{start:d.datum}}
+      }
+    })});
+    if(!r.ok){const e=await r.json();throw new Error(e.message||`Fehler ${r.status}`);}
+    const page=await r.json();
+    const pageId=page.id;
+    // Blocks hinzufügen
+    const blocks=mdToBlocks(content);
+    const CHUNK=100;
+    for(let i=0;i<blocks.length;i+=CHUNK){
+      const bUrl=`https://api.notion.com/v1/blocks/${pageId}/children`;
+      await fetch('/notion/blocks/'+pageId+'/children',{method:'PATCH',headers:hdrs,body:JSON.stringify({children:blocks.slice(i,i+CHUNK)})});
+    }
+    document.getElementById('modal-actions').style.display='none';
+    document.getElementById('success-area').style.display='block';
+    document.getElementById('success-area').innerHTML=`<div class="success-box"><div class="ico">✅</div><h3>Tagesbericht übertragen</h3><p>${titel}</p><p style="margin-top:6px;font-size:11px;opacity:.8">Wurde in Notion gespeichert.</p><a href="${ARCHIV_URL}" target="_blank">→ Berichte-Archiv in Notion öffnen</a></div>`;
+  }catch(err){
+    document.getElementById('err-area').innerHTML=`<div class="err-box"><strong>Fehler:</strong> ${err.message}<br>Bitte nochmal versuchen.</div>`;
+    btn.disabled=false;btn.innerHTML=`<i class="ti ti-send"></i> Nochmal versuchen`;
+  }
+}
+
+function closeModal(){document.getElementById('modal').style.display='none';}
+</script>
+</body>
+</html>
